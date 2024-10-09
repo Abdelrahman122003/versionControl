@@ -1,12 +1,12 @@
 # Version Control
 
-## git commands
+## Git Commands
 
 - Edit the Git Configuration File
 
-```sh
-git config --global --edit
-```
+  ```sh
+  git config --global --edit
+  ```
 
 - `git init`
 
