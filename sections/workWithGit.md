@@ -75,7 +75,7 @@ A pull request (PR) is a feature in Git-based version control systems where a de
 
 - **Version Control**: Helps track changes and keep the main branch stable by preventing direct merges without approval.
 
-## Steps to achieve the Gitflow:
+## Steps to achieve the Gitflow Strategy:
 
 1. Rename main branch to master from the UI.(optional)
 2. Create and switch to the develop branch:
@@ -106,3 +106,51 @@ A pull request (PR) is a feature in Git-based version control systems where a de
    <p align="center">
      <img src="../images/screenPullRequest.png" alt="Git Architecture" width="400" height="100">
    </p>
+
+7. Update `develop` Branch
+
+   ```s
+   git pull origin develop
+   ```
+
+8. We will assume that you repeat steps 5 to 7 for every new feature.
+
+9. Once you have finished the project and want to publish it, create a `release` branch from `develop`.
+
+10. After that, if you want to push a release (from the release branch to production), create a pull request from the `release` branch to the `main` branch.
+
+## Merging vs. Pull Requests
+
+**Why is it recommended to use a pull request instead of a direct merge when incorporating changes**
+
+- **`Code Review`**:
+
+  Pull requests allow team members to review the code changes before they are merged into the main branch. This helps catch issues early and ensures code quality.
+
+- **`Discussion`**
+
+  PRs provide a platform for discussion about the changes. Team members can comment on specific lines of code, suggest improvements, or raise concerns.
+
+- **`History and Documentation`**:
+
+  Pull requests serve as a historical record of changes. They document why changes were made, which can be useful for future reference.
+
+- **`Continuous Integration`**:
+
+  Many CI/CD pipelines are triggered by pull requests. This allows automated tests to run on the changes before they are merged, ensuring that the codebase remains stable.
+
+- **`Controlled Merging`**:
+
+  Using PRs allows for more controlled merging. You can enforce policies such as requiring a certain number of approvals or successful builds before the merge can occur.
+
+- **`Conflict Resolution`**:
+
+  PRs make it easier to handle merge conflicts. If there are conflicts, they can be resolved in the PR branch before merging into the main branch.
+
+- **`Branch Protection`**:
+
+  Many teams use branch protection rules on their main branches. These rules often require that changes come through a pull request, ensuring a consistent process.
+
+- **`Visibility`**:
+
+  Pull requests provide visibility into what features or fixes are being worked on. This helps keep the team informed and aligned on project progress.
