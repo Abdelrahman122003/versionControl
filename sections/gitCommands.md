@@ -45,7 +45,7 @@
   
 - `git reset --soft HEAD~1`
 
-  If you want to undo a commit but keep the changes in your working directory, you can use:
+  If you want to undo a commit but keep the changes in your working directory.
   
 - `git checkout` Command
 
