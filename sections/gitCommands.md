@@ -42,7 +42,11 @@
 - `git reset` .
 
   Use git reset when you want to unstage changes without discarding them, allowing you to adjust or re-stage different files before committing.
+  
+- `git reset --soft HEAD~1`
 
+  If you want to undo a commit but keep the changes in your working directory, you can use:
+  
 - `git checkout` Command
 
   - git checkout -- **file-name**:
