@@ -42,11 +42,11 @@
 - `git reset` .
 
   Use git reset when you want to unstage changes without discarding them, allowing you to adjust or re-stage different files before committing.
-  
+
 - `git reset --soft HEAD~1`
 
   If you want to undo a commit but keep the changes in your working directory.
-  
+
 - `git checkout` Command
 
   - git checkout -- **file-name**:
@@ -173,3 +173,90 @@
    ```bash
    git push origin --delete old-branch-name
    ```
+
+## **Step-by-Step Explanation of Interactive Rebase to Remove a File from a Commit**
+
+- **1️⃣ `Start an Interactive Rebase`**  
+  **Command:**
+
+  ```sh
+  git rebase -i <commit>~
+  ```
+
+  **What it does:**
+
+  - Starts an **interactive rebase** from the commit **before** the one you want to modify.
+  - The `~` ensures Git includes that commit for editing.
+  - To find the commit ID, use:
+    ```sh
+    git log --oneline
+    ```
+    Example log:
+    ```
+    a1b2c3d Fixing UI bug
+    e4f5g6h Added new feature
+    i7j8k9l Initial commit
+    ```
+    If you want to modify `e4f5g6h`, run:
+    ```sh
+    git rebase -i e4f5g6h~
+    ```
+
+- **2️⃣ `Edit the Commit`**
+
+  **What happens next:**
+
+  - Git opens an editor (like Vim or VS Code) listing commits:
+    ```
+    pick e4f5g6h Added new feature
+    pick a1b2c3d Fixing UI bug
+    ```
+  - **Change** `pick` to `edit` on the target commit:
+    ```
+    edit e4f5g6h Added new feature
+    pick a1b2c3d Fixing UI bug
+    ```
+  - **Save and exit** (In Vim: press `Esc`, type `:wq`, and press `Enter`).
+
+- **3️⃣ `Remove the Unwanted File`**
+
+  **Command:**
+
+  ```sh
+  git rm <unwanted-file>
+  ```
+
+  **What it does:**
+
+  - **Deletes the file** from the commit without affecting other files.
+  - Example: If you accidentally committed `secrets.txt`, remove it:
+    ```sh
+    git rm secrets.txt
+    ```
+
+- **4️⃣ `Amend the Commit`**
+
+  **Command:**
+
+  ```sh
+  git commit --amend
+  ```
+
+  **What it does:**
+
+  - Opens the commit message editor so you can **re-save the commit** without the removed file.
+  - You **don’t need to change the message**—just save and exit.
+  - The commit is now **modified** with the file removed.
+
+- **5️⃣ `Continue the Rebase`**
+
+  **Command:**
+
+  ```sh
+  git rebase --continue
+  ```
+
+  **What it does:**
+
+  - Tells Git to continue applying the rest of the commits **on top of the modified one**.
+  - If there are conflicts, Git will ask you to resolve them before proceeding.
