@@ -146,3 +146,30 @@
   ```sh
   git config --global alias.st 'status -s'
   ```
+
+## Rename Branch
+
+1. **Switch to the Branch You Want to Rename**:
+
+   ```bash
+   git checkout old-branch-name
+   ```
+
+2. **Rename the Branch**:
+
+   ```bash
+   # (-m or --move)
+   git branch -m new-branch-name
+   ```
+
+3. **Push the Renamed Branch to Remote** (if the branch exists on the remote):
+
+   ```bash
+   # -u => The -u flag in Git is short for --set-upstream. It is used when pushing a branch to a remote repository to set the upstream (tracking) reference
+   git push origin -u new-branch-name
+   ```
+
+4. **Delete the Old Branch from Remote** (if the branch exists on the remote):
+   ```bash
+   git push origin --delete old-branch-name
+   ```
